@@ -1,7 +1,7 @@
 <template>
 	<div class="device" v-bind:class="{ 'is-online': device.online }">
 		<div class="grid-item">{{ isOnline(device) }}</div>
-		<div class="grid-item">{{ device.display_name }}</div>
+		<div class="grid-item display-name">{{ device.display_name }}</div>
 		<div class="grid-item">
 			{{
 				device.latest_device_point.lat.toFixed(2) +
@@ -44,5 +44,9 @@ export default {
 .grid-item {
 	text-align: center;
 	padding: 6px;
+}
+.display-name{
+	text-align:left;
+	padding-left: 50px;
 }
 </style>

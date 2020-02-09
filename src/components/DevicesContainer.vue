@@ -1,6 +1,11 @@
 <template>
 	<div class="container">
-		<div class="column-headers">
+		<Loading
+			:active.sync="waitingForResponse"
+			:is-full-page="false"
+			:opacity="0.6"
+		/>
+		<div class="column-headers" v-if="devices.length !== 0">
 			<h3>Status</h3>
 			<h3>Display Name</h3>
 			<h3>Latest point</h3>
@@ -13,13 +18,16 @@
 
 <script>
 import Device from "./Device.vue";
+import "vue-loading-overlay/dist/vue-loading.css";
+import Loading from "vue-loading-overlay";
 
 export default {
 	name: "DevicesContainer",
 	components: {
-		Device
+		Device,
+		Loading
 	},
-	props: ["devices"]
+	props: ["devices", "waitingForResponse"]
 };
 </script>
 
@@ -27,7 +35,8 @@ export default {
 .container {
 	margin-left: 20%;
 	margin-right: 20%;
-	
+	position: relative;
+	min-height: 500px;
 }
 
 h3 {
