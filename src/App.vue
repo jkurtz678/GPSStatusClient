@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-    <img alt="One Step GPS logo" src="./assets/logo.png" />
-    <h1>One Step GPS: My Active Devices</h1>
+    <img alt="One Step GPS logo" src="./assets/onestepgps.png" />
+    <h1>My Active Devices:</h1>
     <div class="control-panel">
       <button class="updateBtn" @click="handleClick">Latest Points</button>
       <label class="checkbox-container">
         <input type="checkbox" ref="autoUpdateChecked" />auto update (5s)
       </label>
       <div v-if="updateInterval != null">
-        Auto updating in {{this.updateTime}}<button class="cancelBtn" @click="cancelAutoUpdate">Cancel</button>
+        Auto updating in {{ this.updateTime
+        }}<button class="cancelBtn" @click="cancelAutoUpdate">Cancel</button>
       </div>
     </div>
     <DevicesContainer
@@ -49,9 +50,9 @@ export default {
     },
     clockTick() {
       this.updateTime--;
-      if(this.updateTime === 0) {
+      if (this.updateTime === 0) {
         this.latestPoints();
-        this.updateTime = 5
+        this.updateTime = 5;
       }
     },
     handleClick() {
@@ -76,13 +77,15 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #094079;
   margin-top: 60px;
 }
 
 button {
   font-size: 1.4em;
-  background: #94fccd;
+  /*background: #8ccdff;*/
+  background: #54b2f9;
+  color: #094079;
   border-radius: 10px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
@@ -98,7 +101,7 @@ button {
 }
 
 button:hover {
-  background: #ceffe8;
+  background: #93d0ff;
 }
 
 input {
@@ -109,7 +112,8 @@ input {
   margin-bottom: 10px;
 }
 footer {
-  font-size:0.8em;
-  margin:30px;
- }
+  font-size: 0.8em;
+  margin: 30px;
+  flex-shrink: 0;
+}
 </style>

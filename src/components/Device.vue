@@ -39,7 +39,7 @@ export default {
 }
 
 .is-online {
-	background: #94fccd;
+	background: #54b2f9;
 }
 .grid-item {
 	text-align: center;
