@@ -1,21 +1,23 @@
 <template>
   <div id="app">
-    <img alt="One Step GPS logo" src="./assets/onestepgps.png" />
-    <h1>My Active Devices:</h1>
-    <div class="control-panel">
-      <button class="updateBtn" @click="handleClick">Latest Points</button>
-      <label class="checkbox-container">
-        <input type="checkbox" ref="autoUpdateChecked" />auto update (5s)
-      </label>
-      <div v-if="updateInterval != null">
-        Auto updating in {{ this.updateTime
-        }}<button class="cancelBtn" @click="cancelAutoUpdate">Cancel</button>
+    <div class="content-wrapper">
+      <img alt="One Step GPS logo" src="./assets/onestepgps.png" />
+      <h1>My Active Devices</h1>
+      <div class="control-panel">
+        <button class="updateBtn can-click" @click="handleClick">Latest Points</button>
+        <label class="checkbox-container">
+          <input type="checkbox" ref="autoUpdateChecked" />auto update (5s)
+        </label>
+        <div v-if="updateInterval != null">
+          Auto updating in {{ this.updateTime
+          }}<button class="cancelBtn can-click" @click="cancelAutoUpdate">Cancel</button>
+        </div>
       </div>
+      <DevicesContainer
+        v-bind:devices="devices"
+        v-bind:waitingForResponse="waitingForResponse"
+      />
     </div>
-    <DevicesContainer
-      v-bind:devices="devices"
-      v-bind:waitingForResponse="waitingForResponse"
-    />
     <footer>Developed by Jackson Kurtz</footer>
   </div>
 </template>
@@ -58,6 +60,7 @@ export default {
     handleClick() {
       this.latestPoints();
       if (this.$refs.autoUpdateChecked.checked && this.updateInterval == null) {
+        this.updateTime = 5;
         this.updateInterval = setInterval(() => {
           this.clockTick();
         }, 1000);
@@ -72,18 +75,28 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  min-height: 100vh;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #094079;
-  margin-top: 60px;
+  margin-top: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.content-wrapper {
+  flex: 1 0 auto;
 }
 
 button {
   font-size: 1.4em;
-  /*background: #8ccdff;*/
   background: #54b2f9;
   color: #094079;
   border-radius: 10px;
@@ -100,7 +113,7 @@ button {
   font-size: 1em;
 }
 
-button:hover {
+.can-click:hover {
   background: #93d0ff;
 }
 
@@ -113,7 +126,7 @@ input {
 }
 footer {
   font-size: 0.8em;
-  margin: 30px;
+  margin: 40px;
   flex-shrink: 0;
 }
 </style>

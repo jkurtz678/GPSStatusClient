@@ -9,6 +9,7 @@
 					device.latest_device_point.lng.toFixed(2)
 			}}
 		</div>
+		<div>{{convertDate(device.latest_device_point.dt_tracker)}}</div>
 	</div>
 </template>
 
@@ -24,6 +25,22 @@ export default {
 			else {
 				return "Offline"
 			} 
+		},
+		convertDate(dateStr) {
+			const secDiff = (new Date() - new Date(dateStr)) / 1000
+
+			if(secDiff < 60) {
+				return `${secDiff.toFixed(0)} sec`
+			}
+			else if(secDiff < 3600) {
+				return `${(secDiff/60).toFixed(0)} min`
+			}
+			else if(secDiff < 86400) {
+				return `${(secDiff/3600).toFixed(0)} hr`
+			}
+			else  {
+				return `${(secDiff/86400).toFixed(0)} day`
+			}
 		}
 	}
 };
@@ -35,7 +52,7 @@ export default {
 	border-bottom: 1px #ccc dotted;
 	padding: 10px;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .is-online {
@@ -47,6 +64,5 @@ export default {
 }
 .display-name{
 	text-align:left;
-	padding-left: 50px;
 }
 </style>

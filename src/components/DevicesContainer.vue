@@ -6,11 +6,33 @@
 			:opacity="0.6"
 		/>
 		<div class="column-headers" v-if="devices.length !== 0">
-			<h3>Status</h3>
-			<h3>Display Name</h3>
-			<h3>Latest point</h3>
+			<button
+				class="can-click"
+				v-bind:class="{ 'sorting-by': column_sort === 'status' }"
+				@click="columnHeaderClicked('status')"
+			>
+				Status
+			</button>
+			<button
+				class="can-click"
+				v-bind:class="{ 'sorting-by': column_sort === 'name' }"
+				@click="columnHeaderClicked('name')"
+			>
+				Display Name
+			</button>
+			<button>Latest point</button>
+			<button
+				class="can-click"
+				v-bind:class="{ 'sorting-by': column_sort === 'age' }"
+				@click="columnHeaderClicked('age')"
+			>
+				Time Last Updated
+			</button>
 		</div>
-		<div v-for="device in devices" v-bind:key="device.factory_id">
+		<div
+			v-for="device in sortDevices(devices)"
+			v-bind:key="device.factory_id"
+		>
 			<Device v-bind:device="device" />
 		</div>
 	</div>
@@ -27,26 +49,69 @@ export default {
 		Device,
 		Loading
 	},
-	props: ["devices", "waitingForResponse"]
+	props: ["devices", "waitingForResponse"],
+	data() {
+		return {
+			column_sort: null
+		};
+	},
+	methods: {
+		sortDevices(devices) {
+			const sortDevices = devices.slice();
+			if (this.column_sort === "status") {
+				sortDevices.sort((a, b) => (a.online < b.online ? 1 : -1));
+			} else if (this.column_sort === "name") {
+				sortDevices.sort((a, b) =>
+					a.display_name > b.display_name ? 1 : -1
+				);
+			} else if (this.column_sort === "age") {
+				sortDevices.sort((a, b) =>
+					a.latest_device_point.dt_tracker <
+					b.latest_device_point.dt_tracker
+						? 1
+						: -1
+				);
+			}
+			return sortDevices;
+		},
+		columnHeaderClicked(column) {
+			if (column === this.column_sort) {
+				this.column_sort = null;
+			} else {
+				this.column_sort = column;
+			}
+		}
+	}
 };
 </script>
 
 <style scoped>
 .container {
-	margin-left: 20%;
-	margin-right: 20%;
+	margin-left: 15%;
+	margin-right: 15%;
 	position: relative;
 	min-height: 500px;
 }
 
-h3 {
+button {
 	text-decoration: underline;
 	margin-bottom: 0px;
+	font-size: 1.3em;
+	margin: 0px 6px 5px 6px;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	font-weight: bold;
+}
+
+.sorting-by {
+	background-color: #094079;
+	color: white;
 }
 
 .column-headers {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	padding: 10px;
+	grid-template-columns: repeat(4, 1fr);
+	padding: 3px;
 }
 </style>
