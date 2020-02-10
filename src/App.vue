@@ -4,13 +4,17 @@
       <img alt="One Step GPS logo" src="./assets/onestepgps.png" />
       <h1>My Active Devices</h1>
       <div class="control-panel">
-        <button class="updateBtn can-click" @click="handleClick">Latest Points</button>
+        <button class="updateBtn can-click" @click="handleClick">
+          Latest Points
+        </button>
         <label class="checkbox-container">
           <input type="checkbox" ref="autoUpdateChecked" />auto update (5s)
         </label>
         <div v-if="updateInterval != null">
-          Auto updating in {{ this.updateTime
-          }}<button class="cancelBtn can-click" @click="cancelAutoUpdate">Cancel</button>
+          Auto updating in {{ this.updateTime }}
+          <button class="cancelBtn can-click" @click="cancelAutoUpdate">
+            Cancel
+          </button>
         </div>
       </div>
       <DevicesContainer
@@ -101,6 +105,7 @@ button {
   color: #094079;
   border-radius: 10px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  outline: none;
 }
 
 .updateBtn {

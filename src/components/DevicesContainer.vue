@@ -20,13 +20,13 @@
 			>
 				Display Name
 			</button>
-			<button>Latest point</button>
+			<button>Latest Point</button>
 			<button
 				class="can-click"
 				v-bind:class="{ 'sorting-by': column_sort === 'age' }"
 				@click="columnHeaderClicked('age')"
 			>
-				Time Last Updated
+				Retrieved Time
 			</button>
 		</div>
 		<div

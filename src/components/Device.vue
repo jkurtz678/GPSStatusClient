@@ -30,16 +30,16 @@ export default {
 			const secDiff = (new Date() - new Date(dateStr)) / 1000
 
 			if(secDiff < 60) {
-				return `${secDiff.toFixed(0)} sec`
+				return `${secDiff.toFixed(0)} sec ago`
 			}
 			else if(secDiff < 3600) {
-				return `${(secDiff/60).toFixed(0)} min`
+				return `${(secDiff/60).toFixed(0)} min ago`
 			}
 			else if(secDiff < 86400) {
-				return `${(secDiff/3600).toFixed(0)} hr`
+				return `${(secDiff/3600).toFixed(0)} hr ago`
 			}
 			else  {
-				return `${(secDiff/86400).toFixed(0)} day`
+				return `${(secDiff/86400).toFixed(0)} day ago`
 			}
 		}
 	}
