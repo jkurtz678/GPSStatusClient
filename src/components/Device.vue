@@ -26,6 +26,7 @@ export default {
 				return "Offline"
 			} 
 		},
+		//calculates length of time since given datetime, formats to string
 		convertDate(dateStr) {
 			const secDiff = (new Date() - new Date(dateStr)) / 1000
 

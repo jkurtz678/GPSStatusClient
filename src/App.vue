@@ -44,6 +44,7 @@ export default {
     };
   },
   methods: {
+    //retrieve latest GPS points data from local Go server
     latestPoints() {
       this.waitingForResponse = true;
       axios
@@ -54,6 +55,7 @@ export default {
         })
         .catch(err => err);
     },
+    //countdown display for automatic update
     clockTick() {
       this.updateTime--;
       if (this.updateTime === 0) {
@@ -61,6 +63,7 @@ export default {
         this.updateTime = 5;
       }
     },
+    //triggers device update and starts automatic updating if box is checked
     handleClick() {
       this.latestPoints();
       if (this.$refs.autoUpdateChecked.checked && this.updateInterval == null) {
@@ -70,6 +73,7 @@ export default {
         }, 1000);
       }
     },
+    //stop automatic updating timer
     cancelAutoUpdate() {
       clearInterval(this.updateInterval);
       this.updateInterval = null;

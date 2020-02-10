@@ -56,6 +56,7 @@ export default {
 		};
 	},
 	methods: {
+		//sorts devices based on selected column
 		sortDevices(devices) {
 			const sortDevices = devices.slice();
 			if (this.column_sort === "status") {
@@ -74,6 +75,7 @@ export default {
 			}
 			return sortDevices;
 		},
+		//toggle column header selected
 		columnHeaderClicked(column) {
 			if (column === this.column_sort) {
 				this.column_sort = null;
