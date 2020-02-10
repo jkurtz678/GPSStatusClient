@@ -26,7 +26,7 @@
 				v-bind:class="{ 'sorting-by': column_sort === 'age' }"
 				@click="columnHeaderClicked('age')"
 			>
-				Retrieved Time
+				Updated Time
 			</button>
 		</div>
 		<div
